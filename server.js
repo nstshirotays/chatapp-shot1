@@ -32,22 +32,20 @@ Chats.create({
     toAddress : myID,
     message : 'こんにちは',
     timeStamp : getDateTime()
-    })
-    .then((postData) => {
-       res.json(postData);
-    })
-    .catch((err) => {
-       res.send(err);
     });
 
 // 直近の会話を比較用に保存
-var resentMsg = "";
+var resentMsg = "---";
 var query = { "fromAddress": "01" };
     Chats.find(query,{},{sort:{_id: -1},limit:1}, function(err, data){
         if(err){
             console.log(err);
         }
-        resentMsg =data[0].timeStamp + data[0].message;
+        if(!data){
+            if (data[0].timeStamp !==''){
+                resentMsg =data[0].timeStamp + data[0].message;
+            }
+        }
     });
 
 // クライアントからgetされると会話全件をjsonで返す
@@ -140,7 +138,7 @@ function getDateTime(){
     format_str = format_str.replace(/mm/g, minute_str);
     format_str = format_str.replace(/ss/g, second_str);
 
-    return format_str
+    return format_str;
 
 }
 
