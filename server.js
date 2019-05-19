@@ -26,6 +26,20 @@ var Chats = mongoose.model(chatCollection, {
     timeStamp :String
 });
 
+//  最初の挨拶を登録
+Chats.create({
+    fromAddress : f1ID,
+    toAddress : myID,
+    message : 'こんにちは',
+    timeStamp : getDateTime()
+    })
+    .then((postData) => {
+       res.json(postData);
+    })
+    .catch((err) => {
+       res.send(err);
+    });
+
 // 直近の会話を比較用に保存
 var resentMsg = "";
 var query = { "fromAddress": "01" };
@@ -88,8 +102,8 @@ function msgFooking(msg){
         toAddress : myID,
         message : msg + "ですね",
         timeStamp : getDateTime()
-    })
-};
+    });
+}
 
 
 // ルートアクセス時にベースの画面を返す
