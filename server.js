@@ -109,10 +109,10 @@ function msgFooking(msg){
 // ルートアクセス時にベースの画面を返す
 // 友達の名前とそれぞれのIDをEJSでHTMLに埋め込む
 app.get('/', (req, res) => {
-    res.render('chatapp.ejs', 
-                {frendName: 'Echo' , 
-                myidf: myID ,
-                fiidf: f1ID });
+    res.render('chatapp.ejs',
+        {frendName: 'Echo' ,
+         myidf: myID ,
+         fiidf: f1ID });
 });
 
 // 日時の整形処理
